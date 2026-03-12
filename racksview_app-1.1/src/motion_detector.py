@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from asyncio.log import logger
 import datetime
 import sys

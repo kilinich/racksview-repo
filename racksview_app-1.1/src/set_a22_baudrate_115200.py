@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import sys
 import argparse
 import serial
@@ -39,4 +41,8 @@ def main():
             print("Received:", ' '.join(f"{b:02X}" for b in response))
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\nExiting on Ctrl-C.")
+        sys.exit(0)

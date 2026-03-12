@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 ExecStartPre=/usr/bin/rm -f /var/log/racksview/mdetector-front.log
-ExecStart=/opt/racksview/bin/start_mdetector.sh --profile front
+ExecStart=/opt/racksview/bin/mdetector-service.sh --profile front
 Restart=on-failure
 RestartSec=10
 StandardOutput=file:/var/log/racksview/mdetector-front.log

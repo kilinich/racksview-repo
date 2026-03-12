@@ -1,0 +1,18 @@
+[Unit]
+Description=Application status service
+After=network.target
+
+[Service]
+ExecStartPre=/bin/sleep 5
+ExecStartPre=/usr/bin/rm -f /var/log/racksview/appstatus.log
+ExecStart=/opt/racksview/bin/appstatus_service.sh
+Restart=on-failure
+RestartSec=10
+StandardOutput=file:/var/log/racksview/appstatus.log
+StandardError=file:/var/log/racksview/appstatus.log
+MemoryMax=100M
+KillSignal=SIGINT
+TimeoutStopSec=5
+
+[Install]
+WantedBy=multi-user.target

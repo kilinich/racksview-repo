@@ -5,7 +5,7 @@ Requires=gstreamer-front.service
 
 [Service]
 Type=simple
-ExecStart=/opt/racksview/bin/start_vrecorder.sh --profile front
+ExecStart=/opt/racksview/bin/vrecorder-service.sh --profile front
 Restart=on-failure
 ExecStartPre=/usr/bin/rm -f /var/log/racksview/vrecoder-front.log
 StandardOutput=file:/var/log/racksview/vrecorder-front.log

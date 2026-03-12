@@ -2,6 +2,8 @@
 set +e
 
 # Stop all services
+echo "Stopping appstatus..."
+sudo systemctl stop appstatus.service
 echo "Stopping vrecorder-front..."
 sudo systemctl stop vrecorder-front.service
 echo "Stopping mdetector-front..."

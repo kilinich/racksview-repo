@@ -2,16 +2,14 @@
 set -e
 
 enable_services=(
+    appstatus.service
     gstreamer-front.service
-    mdetector-front.service
-    vrecorder-front.service
-    rvmanager.timer
-)
-
-disable_services=(
     gstreamer-back.service
+    mdetector-front.service
     mdetector-back.service
+    vrecorder-front.service
     vrecorder-back.service
+    rvmanager.timer
 )
 
 echo "Removing legacy services..."
@@ -21,24 +19,13 @@ echo "Stopping services before installation..."
 for service in "${enable_services[@]}"; do
     echo " - Stopping service: ${service}"
     sudo systemctl stop "${service}" || true
-done
-for service in "${disable_services[@]}"; do
-    echo " - Stopping service: ${service}"
-    sudo systemctl stop "${service}" || true
-done
-for service in "${disable_services[@]}"; do
-    echo " - Disabling service: ${service}"
-    sudo systemctl mask "${service}" || true
-done
-for service in "${enable_services[@]}"; do
-    echo " - Unmasking service: ${service}"
     sudo systemctl unmask "${service}" || true
 done
 
 APP_SRC="$(pwd)"
 DEST_DIR="/opt/racksview"
 SYSTEMD_DIR="/usr/lib/systemd/system"
-NGINX_CONF_SRC="$APP_SRC/etc/nginx-single.conf"
+NGINX_CONF_SRC="$APP_SRC/etc/nginx.conf"
 NGINX_CONF_DEST="/usr/local/openresty/nginx/conf/nginx.conf"
 
 echo "Creating $DEST_DIR and copying bin and etc directories..."

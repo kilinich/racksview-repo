@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import sys
 import argparse
 import serial
@@ -25,4 +27,8 @@ def main():
                 print(f"{byte[0]:02X}", end=' ', flush=True)
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\nExiting on Ctrl-C.")
+        sys.exit(0)

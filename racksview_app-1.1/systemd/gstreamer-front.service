@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 ExecStartPre=/usr/bin/rm -f /var/log/racksview/gstreamer-front.log
-ExecStart=/opt/racksview/bin/start_gstreamer.sh --profile front
+ExecStart=/opt/racksview/bin/gstreamer-service.sh --profile front
 Restart=on-failure
 RestartSec=60
 StandardOutput=null

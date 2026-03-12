@@ -2,6 +2,7 @@
 set +e
 
 services=(
+    appstatus.service
     gstreamer-back.service
     gstreamer-front.service
     mdetector-back.service

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RacksView Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h2>RacksView Dashboard</h2>
+
+    <div class="rack-video">
+        <h3 class="rack-video-header">Live preview</h3>
+        <div class="rack-video-content">
+            <div class="rack-video-img-block">
+                <img src="/preview1" alt="Preview 1">
+                <button onclick="window.open('/stream1', '_blank')">View stream</button>
+            </div>
+            <div class="rack-video-img-block">
+                <img src="/preview2" alt="Preview 2">
+                <button onclick="window.open('/stream2', '_blank')">View stream</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="rack-status">
+        <h3 class="rack-status-header">Status</h3>
+        <pre id="status-text"></pre>
+    </div>
+    <script src="script.js"></script>
+
+    <div class="events-list">
+        <h3 class="events-list-header">Events</h3>
+        <iframe src="/video/"></iframe>
+    </div>
+</body>
+
+</html>
