@@ -7,6 +7,8 @@ from PIL import Image, ImageDraw, ImageFont
 import socket
 from datetime import datetime
 import uuid
+import subprocess
+import shutil
 
 # Initialize I2C and OLED
 i2c = busio.I2C(board.SCL, board.SDA)
@@ -35,6 +37,26 @@ def get_mac():
 def get_hostname():
     return socket.gethostname()
 
+def get_uptime():
+    try:
+        out = subprocess.check_output(['uptime', '-p']).decode('utf-8').strip()
+        out = out.replace("hours", "h").replace("hour", "h")
+        out = out.replace("minutes", "m").replace("minute", "m")
+        out = out.replace("days", "d").replace("day", "d")
+        out = out.replace("weeks", "w").replace("week", "w")
+        out = out.replace(", ", " ")
+        return out
+    except Exception:
+        return "up N/A"
+
+def get_free_space():
+    try:
+        free = shutil.disk_usage("/").free
+        free_gb = free / (1024**3)
+        return f"Free: {free_gb:.1f} GB"
+    except Exception:
+        return "Free: N/A"
+
 def update_display():
     # 1. Clear / Create Image buffer
     image = Image.new("1", (oled.width, oled.height))
@@ -45,14 +67,17 @@ def update_display():
     ip_str = get_ip()
     mac_str = get_mac()
     dt_str = datetime.now().strftime("%Y-%m-%d %H:%M")
+    uptime_str = get_uptime()
+    free_space_str = get_free_space()
 
     # 3. Draw lines centered
     # 8 lines fit in 64px, so each line is ~8px high. Our font is size 10.
-    # We have 4 lines, total height ~ 44px. 
-    # Center vertically: (64 - 44) // 2 = 10
-    lines = [hostname_str, ip_str, mac_str, dt_str]
-    y_start = 10
-    y_step = 11
+    # We have 6 lines, total height ~ 66px (if y_step is 11) - wait, maybe y_step 10 is better
+    # Center vertically:
+    lines = [hostname_str, ip_str, mac_str, dt_str, uptime_str, free_space_str]
+    y_step = 10
+    total_text_height = len(lines) * y_step
+    y_start = (oled.height - total_text_height) // 2
 
     for i, line in enumerate(lines):
         line_w = draw.textlength(line, font=font)
