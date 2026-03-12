@@ -31,8 +31,8 @@ case "$PROFILE" in
 esac
 
 # Configuration
-RUN_ON_START_REC="/opt/racksview/notify/on_start_recording.sh"
-RUN_ON_STOP_REC="/opt/racksview/notify/on_stop_recording.sh"
+RUN_ON_START_REC="/opt/racksview/scripts/on_start_recording.sh"
+RUN_ON_STOP_REC="/opt/racksview/scripts/on_stop_recording.sh"
 TARGET_BASE="/opt/racksview/var/video"
 TEMP_NAME="_recording-in-progress"
 SEGMENT_DURATION=300

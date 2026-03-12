@@ -50,7 +50,7 @@ sudo apt-get install -y \
     gstreamer1.0-gtk3 \
     gstreamer1.0-qt5 \
     gstreamer1.0-libcamera \
-    ffmpeg
+    ffmpeg \
 
 echo "GStreamer and FFmpeg installation complete."
 
@@ -59,3 +59,7 @@ sudo apt-get install -y gdebi-core
 sudo gdebi -n ./lib/usbmount*.deb
 echo "usbmount installation complete."
 
+echo "Installing required Python modules system-wide..."
+sudo apt-get install -y python3-pip
+sudo pip3 install adafruit-circuitpython-ssd1306 pillow pyserial
+echo "Python modules installation complete."
