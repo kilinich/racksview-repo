@@ -133,7 +133,7 @@ while true; do
 
     mv -f "$TMP_FILE" "$FINAL_FILE"
 
-    /opt/racksview/src/display_update.py
+    /usr/bin/python3 /opt/racksview/src/display_update.py
 
     sleep 10
 done
